@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-root',
     templateUrl: './template.html',
-    styleUrls: ['./style.sass']
+    styleUrls: ['./style.sass'],
 })
-export class AppComponent {
+export class RootComponent {
     title = 'Load CSV';
 }
