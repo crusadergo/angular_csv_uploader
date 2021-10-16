@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RootComponent } from './root/component';
 import { UploadFormComponent } from './uploadForm/component';
+import { CsvListComponent } from './csvList/component';
 
 @NgModule({
-    declarations: [RootComponent, UploadFormComponent],
+    declarations: [RootComponent, UploadFormComponent, CsvListComponent],
     imports: [BrowserModule, AppRoutingModule],
     providers: [],
     bootstrap: [RootComponent],
