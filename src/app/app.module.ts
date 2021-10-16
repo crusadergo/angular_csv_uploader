@@ -5,9 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { RootComponent } from './root/component';
 import { UploadFormComponent } from './uploadForm/component';
 import { CsvListComponent } from './csvList/component';
+import { CsvItemComponent } from './csvItem/component';
 
 @NgModule({
-    declarations: [RootComponent, UploadFormComponent, CsvListComponent],
+    declarations: [
+        RootComponent,
+        UploadFormComponent,
+        CsvListComponent,
+        CsvItemComponent,
+    ],
     imports: [BrowserModule, AppRoutingModule],
     providers: [],
     bootstrap: [RootComponent],

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'csv-list',
+    selector: 'csv-item',
     templateUrl: 'template.html',
     styleUrls: ['style.sass'],
 })
-export class CsvListComponent {}
+export class CsvItemComponent {}
