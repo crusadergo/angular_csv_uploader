@@ -6,6 +6,8 @@ import { RootComponent } from './root/component';
 import { UploadFormComponent } from './uploadForm/component';
 import { CsvListComponent } from './csvList/component';
 import { CsvItemComponent } from './csvItem/component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -14,7 +16,7 @@ import { CsvItemComponent } from './csvItem/component';
         CsvListComponent,
         CsvItemComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule],
+    imports: [BrowserModule, AppRoutingModule, GraphQLModule, HttpClientModule],
     providers: [],
     bootstrap: [RootComponent],
 })
