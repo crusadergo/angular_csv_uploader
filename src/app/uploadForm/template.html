@@ -1,5 +1,9 @@
+<input type="text" class="csv-title" (input)="setTitle($event)" />
+
 <input
     type="file"
     class="file-upload"
-    onchange="handleFile($event.target.files)"
+    onchange="setFile($event.target.files)"
 />
+
+<button (click)="onUpload()">Upload</button>
