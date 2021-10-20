@@ -1,2 +1,4 @@
 <p>CSV List</p>
-<csv-item [testField]="testField"></csv-item>
+<div *ngFor="let csv_file of csv_files">
+    <csv-item [csv_file]="csv_file"></csv-item>
+</div>

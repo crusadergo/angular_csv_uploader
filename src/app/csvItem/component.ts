@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['style.sass'],
 })
 export class CsvItemComponent implements OnInit {
-    @Input() testField = '';
+    @Input() csv_file: Record<string, string> = {};
 
     constructor() {}
 

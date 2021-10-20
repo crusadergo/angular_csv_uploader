@@ -8,7 +8,7 @@ import { Apollo, gql } from 'apollo-angular';
 })
 export class CsvListComponent implements OnInit {
     loading = true;
-    testField = '';
+    csv_files: Array<Record<string, string>> = [];
 
     constructor(private apollo: Apollo) {}
 
@@ -17,12 +17,14 @@ export class CsvListComponent implements OnInit {
             .watchQuery({
                 query: gql`
                     {
-                        testField
+                        csvList {
+                            title
+                        }
                     }
                 `,
             })
             .valueChanges.subscribe((result: any) => {
-                this.testField = result?.data?.testField;
+                this.csv_files = result?.data?.csvList;
             });
     }
 }
