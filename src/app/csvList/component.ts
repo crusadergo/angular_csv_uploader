@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
+export const CSV_FILES = gql`
+    {
+        csvList {
+            title
+        }
+    }
+`;
+
 @Component({
     selector: 'csv-list',
     templateUrl: 'template.html',
@@ -15,13 +23,7 @@ export class CsvListComponent implements OnInit {
     ngOnInit() {
         this.apollo
             .watchQuery({
-                query: gql`
-                    {
-                        csvList {
-                            title
-                        }
-                    }
-                `,
+                query: CSV_FILES,
             })
             .valueChanges.subscribe((result: any) => {
                 this.csv_files = result?.data?.csvList;

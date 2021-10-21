@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { CSV_FILES } from '../csvList/component';
 
 const CREATE_CSV = gql`
-    mutation csvCreate($title: String!, $file: Upload) {
+    mutation createCsv($title: String!, $file: Upload) {
         createCsv(input: { params: { title: $title, file: $file } }) {
             csvObject {
                 title
@@ -11,6 +12,19 @@ const CREATE_CSV = gql`
         }
     }
 `;
+
+type csv = {
+    title: String;
+};
+
+type Response = {
+    csv: csv;
+};
+
+type Variables = {
+    title: string;
+    file: File | null;
+};
 
 @Component({
     selector: 'upload-form',
@@ -23,8 +37,15 @@ export class UploadFormComponent {
     file: File | null = null;
     title: string = '';
 
-    setFile(files: FileList) {
-        this.file = files.item(0);
+    setFile(target: EventTarget | null) {
+        if (!(target instanceof HTMLInputElement)) {
+            return;
+        }
+        if (!target.files) {
+            return;
+        }
+
+        this.file = target.files.item(0);
     }
 
     setTitle(event: Event): void {
@@ -33,11 +54,15 @@ export class UploadFormComponent {
 
     onUpload() {
         this.apollo
-            .mutate({
+            .mutate<Response, Variables>({
                 mutation: CREATE_CSV,
                 variables: {
                     title: this.title,
                     file: this.file,
+                },
+                update: (store, { data: createCsv }) => {
+                    const data: any = store.readQuery({ query: CSV_FILES });
+                    console.log(data.csvList);
                 },
             })
             .subscribe();
