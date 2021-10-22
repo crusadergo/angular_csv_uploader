@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 export const CSV_FILES = gql`
-    {
+    query csvList {
         csvList {
             title
         }
