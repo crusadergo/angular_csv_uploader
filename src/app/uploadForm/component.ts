@@ -49,24 +49,24 @@ export class UploadFormComponent {
                     title: this.title,
                     file: this.file,
                 },
-                update: (store, { data: upload }) => {
-                    const data = store.readQuery<getAll>({
+                update: (store, { data }) => {
+                    const cached = store.readQuery<getAll>({
                         query: GET_ALL,
                     });
 
-                    if (!data) {
+                    if (!cached) {
                         return;
                     }
 
-                    if (!upload?.createCsv) {
+                    if (!data?.createCsv) {
                         return;
                     }
 
-                    const csvs = [upload.createCsv.item, ...data.csvs];
+                    const csvs = [data.createCsv.item, ...cached.csvs];
 
                     store.writeQuery<getAll>({
                         query: GET_ALL,
-                        data: { ...data, csvs },
+                        data: { ...cached, csvs },
                     });
                 },
             })
