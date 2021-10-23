@@ -8,6 +8,7 @@ import { CsvListComponent } from './csvList/component';
 import { CsvItemComponent } from './csvItem/component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,13 @@ import { HttpClientModule } from '@angular/common/http';
         CsvListComponent,
         CsvItemComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule, GraphQLModule, HttpClientModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        GraphQLModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+    ],
     providers: [],
     bootstrap: [RootComponent],
 })

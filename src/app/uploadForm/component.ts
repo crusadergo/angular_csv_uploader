@@ -3,6 +3,7 @@ import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { GET_ALL } from '../csvList/component';
 import { MutVariables, Mut } from '../uploadForm/__generated__/mut';
 import { getAll } from '../csvList/__generated__/getAll';
+import { FormControl } from '@angular/forms';
 
 const ADD_CSV = gql`
     mutation Mut($title: String!, $file: Upload) {
@@ -22,6 +23,8 @@ const ADD_CSV = gql`
 })
 export class UploadFormComponent {
     constructor(private apollo: Apollo) {}
+
+    title_field = new FormControl('');
 
     file: File | null = null;
     title: string = '';
@@ -70,13 +73,8 @@ export class UploadFormComponent {
                     });
                 },
             })
-            .subscribe(
-                ({ data }) => {
-                    console.log('got data', data);
-                },
-                (error) => {
-                    console.log('there was an error sending the query', error);
-                }
-            );
+            .subscribe(() => {
+                this.title_field.reset();
+            });
     }
 }

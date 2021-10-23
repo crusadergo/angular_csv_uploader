@@ -1,4 +1,9 @@
-<input type="text" class="csv-title" (input)="setTitle($event)" />
+<input
+    type="text"
+    class="csv-title"
+    (input)="setTitle($event)"
+    [formControl]="title_field"
+/>
 
 <input type="file" class="file-upload" (change)="setFile($event.target)" />
 
