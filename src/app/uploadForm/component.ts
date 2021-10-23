@@ -4,6 +4,8 @@ import { GET_ALL } from '../csvList/component';
 import {
     new_csv_create_createdCsv,
     new_csvVariables,
+    new_csv_create,
+    new_csv,
 } from '../uploadForm/__generated__/new_csv';
 import { getAll } from '../csvList/__generated__/getAll';
 
@@ -46,13 +48,13 @@ export class UploadFormComponent {
 
     onUpload() {
         this.apollo
-            .mutate<new_csv_create_createdCsv, new_csvVariables>({
+            .mutate<new_csv, new_csvVariables>({
                 mutation: NEW_CSV,
                 variables: {
                     title: this.title,
                     file: this.file,
                 },
-                update: (store, { data: createdCsv }) => {
+                update: (store, { data: upload }) => {
                     const data = store.readQuery<getAll>({
                         query: GET_ALL,
                     });
@@ -61,26 +63,11 @@ export class UploadFormComponent {
                         return;
                     }
 
-                    if (!createdCsv) {
+                    if (!upload?.create) {
                         return;
                     }
 
-                    // const rr = {
-                    //     q: 'wer',
-                    //     w: 123,
-                    //     t: true,
-                    // };
-
-                    // const tt: { uu: 'hello' } = {
-                    //     uu: 'hello',
-                    // };
-
-                    // const allInfos = [1, 3, 8, 4];
-                    // const newInfo = 9;
-
-                    // const ww = { ...rr, ...tt, info: [...allInfos, newInfo] };
-
-                    const csvs = [...data.csvs, createdCsv];
+                    const csvs = [upload.create.createdCsv, ...data.csvs];
 
                     store.writeQuery<getAll>({
                         query: GET_ALL,
