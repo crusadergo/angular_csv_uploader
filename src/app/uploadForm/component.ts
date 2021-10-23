@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { GET_ALL } from '../csvList/component';
-import {
-    new_csv_create_createdCsv,
-    new_csvVariables,
-    new_csv_create,
-    new_csv,
-} from '../uploadForm/__generated__/new_csv';
+import { MutVariables, Mut } from '../uploadForm/__generated__/mut';
 import { getAll } from '../csvList/__generated__/getAll';
 
-const NEW_CSV = gql`
-    mutation new_csv($title: String!, $file: Upload) {
-        create(input: { params: { title: $title, file: $file } }) {
-            createdCsv {
+const ADD_CSV = gql`
+    mutation Mut($title: String!, $file: Upload) {
+        createCsv(input: { params: { title: $title, file: $file } }) {
+            item {
                 title
                 file
             }
@@ -48,8 +43,8 @@ export class UploadFormComponent {
 
     onUpload() {
         this.apollo
-            .mutate<new_csv, new_csvVariables>({
-                mutation: NEW_CSV,
+            .mutate<Mut, MutVariables>({
+                mutation: ADD_CSV,
                 variables: {
                     title: this.title,
                     file: this.file,
@@ -63,11 +58,11 @@ export class UploadFormComponent {
                         return;
                     }
 
-                    if (!upload?.create) {
+                    if (!upload?.createCsv) {
                         return;
                     }
 
-                    const csvs = [upload.create.createdCsv, ...data.csvs];
+                    const csvs = [upload.createCsv.item, ...data.csvs];
 
                     store.writeQuery<getAll>({
                         query: GET_ALL,

@@ -4,25 +4,25 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: new_csv
+// GraphQL mutation operation: Mut
 // ====================================================
 
-export interface new_csv_create_createdCsv {
+export interface Mut_createCsv_item {
   __typename: "CsvStorage";
   title: string;
   file: any | null;
 }
 
-export interface new_csv_create {
+export interface Mut_createCsv {
   __typename: "UploadPayload";
-  createdCsv: new_csv_create_createdCsv;
+  item: Mut_createCsv_item;
 }
 
-export interface new_csv {
-  create: new_csv_create | null;
+export interface Mut {
+  createCsv: Mut_createCsv | null;
 }
 
-export interface new_csvVariables {
+export interface MutVariables {
   title: string;
   file?: any | null;
 }
