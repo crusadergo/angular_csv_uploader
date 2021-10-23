@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
-export const CSV_FILES = gql`
-    query csvList {
-        csvList {
+export const GET_ALL = gql`
+    query getAll {
+        csvs {
             title
+            file
         }
     }
 `;
@@ -23,10 +24,11 @@ export class CsvListComponent implements OnInit {
     ngOnInit() {
         this.apollo
             .watchQuery({
-                query: CSV_FILES,
+                query: GET_ALL,
             })
             .valueChanges.subscribe((result: any) => {
-                this.csv_files = result?.data?.csvList;
+                // TODO: Add types
+                this.csv_files = result?.data?.csvs;
             });
     }
 }

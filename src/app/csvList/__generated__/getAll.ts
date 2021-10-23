@@ -4,14 +4,15 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: csvList
+// GraphQL query operation: getAll
 // ====================================================
 
-export interface csvList_csvList {
+export interface getAll_csvs {
   __typename: "CsvStorage";
   title: string;
+  file: any | null;
 }
 
-export interface csvList {
-  csvList: csvList_csvList[];
+export interface getAll {
+  csvs: getAll_csvs[];
 }

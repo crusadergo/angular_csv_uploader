@@ -44,14 +44,14 @@ input CsvStorageInput {
 }
 
 type Mutation {
-  createCsv(
+  create(
     """Parameters for Upload"""
     input: UploadInput!
   ): UploadPayload
 }
 
 type Query {
-  csvList: [CsvStorage!]!
+  csvs: [CsvStorage!]!
 }
 
 scalar Upload
@@ -68,5 +68,5 @@ input UploadInput {
 type UploadPayload {
   """A unique identifier for the client performing the mutation."""
   clientMutationId: String
-  csvObject: CsvStorage!
+  createdCsv: CsvStorage!
 }
