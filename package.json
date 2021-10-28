@@ -12,6 +12,7 @@
     "private": true,
     "dependencies": {
         "@angular/animations": "~11.2.7",
+        "@angular/cdk": "^12.2.11",
         "@angular/common": "~11.2.7",
         "@angular/compiler": "~11.2.7",
         "@angular/core": "~11.2.7",
@@ -20,7 +21,10 @@
         "@angular/platform-browser-dynamic": "~11.2.7",
         "@angular/router": "~11.2.7",
         "@apollo/client": "^3.0.0",
+        "@types/angular-material": "^1.1.73",
+        "@types/apollo-upload-client": "^14.1.0",
         "apollo-angular": "^2.6.0",
+        "apollo-upload-client": "^16.0.0",
         "graphql": "^15.0.0",
         "rxjs": "~6.6.0",
         "tslib": "^2.0.0",

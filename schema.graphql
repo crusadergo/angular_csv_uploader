@@ -33,7 +33,8 @@ directive @connection(
 ) on FIELD
 
 type CsvStorage {
-  file: Upload
+  file: Upload!
+  filename: String!
   id: ID!
   title: String!
 }

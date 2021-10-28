@@ -5,6 +5,11 @@
     [formControl]="title_field"
 />
 
-<input type="file" class="file-upload" (change)="setFile($event.target)" />
+<input
+    type="file"
+    [formControl]="file_field"
+    class="file-upload"
+    (change)="setFile($event.target)"
+/>
 
 <button (click)="onUpload()">Upload</button>

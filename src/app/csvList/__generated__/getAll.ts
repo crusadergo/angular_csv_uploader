@@ -10,7 +10,7 @@
 export interface getAll_csvs {
   __typename: "CsvStorage";
   title: string;
-  file: any | null;
+  filename: string;
 }
 
 export interface getAll {

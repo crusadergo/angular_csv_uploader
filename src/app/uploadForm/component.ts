@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { Apollo, gql } from 'apollo-angular';
 import { GET_ALL } from '../csvList/component';
 import { MutVariables, Mut } from '../uploadForm/__generated__/mut';
 import { getAll } from '../csvList/__generated__/getAll';
@@ -10,7 +10,7 @@ const ADD_CSV = gql`
         createCsv(input: { params: { title: $title, file: $file } }) {
             item {
                 title
-                file
+                filename
             }
         }
     }
@@ -25,6 +25,7 @@ export class UploadFormComponent {
     constructor(private apollo: Apollo) {}
 
     title_field = new FormControl('');
+    file_field = new FormControl('');
 
     file: File | null = null;
     title: string = '';
@@ -73,8 +74,10 @@ export class UploadFormComponent {
                     });
                 },
             })
-            .subscribe(() => {
+            .subscribe((data) => {
+                console.log(data);
                 this.title_field.reset();
+                this.file_field.reset();
             });
     }
 }

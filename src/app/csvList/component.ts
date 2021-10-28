@@ -5,7 +5,7 @@ export const GET_ALL = gql`
     query getAll {
         csvs {
             title
-            file
+            filename
         }
     }
 `;
