@@ -9,7 +9,7 @@ import { CsvItemComponent } from './csvItem/component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
     declarations: [
         RootComponent,
@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         GraphQLModule,
         HttpClientModule,
         ReactiveFormsModule,
+        MatTableModule,
     ],
     providers: [],
     bootstrap: [RootComponent],

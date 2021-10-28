@@ -1,4 +1,15 @@
 <p>CSV List</p>
-<div *ngFor="let csv_file of csv_files">
-    <csv-item [csv_file]="csv_file"></csv-item>
-</div>
+<table mat-table #table [dataSource]="csv_files" matSort class="main-table">
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>title</th>
+        <td mat-cell *matCellDef="let element">{{element.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="filename">
+        <th mat-header-cell *matHeaderCellDef>filename</th>
+        <td mat-cell *matCellDef="let element">{{element.filename}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
