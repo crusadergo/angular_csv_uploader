@@ -1,12 +1,12 @@
 <p>CSV List</p>
 <table mat-table #table [dataSource]="csv_files" matSort class="main-table">
     <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>title</th>
+        <th mat-header-cell *matHeaderCellDef>Title</th>
         <td mat-cell *matCellDef="let element">{{element.title}}</td>
     </ng-container>
 
     <ng-container matColumnDef="filename">
-        <th mat-header-cell *matHeaderCellDef>filename</th>
+        <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element">{{element.filename}}</td>
     </ng-container>
 
