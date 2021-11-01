@@ -24,5 +24,5 @@ export interface Mut {
 
 export interface MutVariables {
   title: string;
-  file?: any | null;
+  file: any;
 }

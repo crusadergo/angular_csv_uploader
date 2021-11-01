@@ -3,10 +3,10 @@ import { Apollo, gql } from 'apollo-angular';
 import { GET_ALL } from '../csvList/component';
 import { MutVariables, Mut } from '../uploadForm/__generated__/mut';
 import { getAll } from '../csvList/__generated__/getAll';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 const ADD_CSV = gql`
-    mutation Mut($title: String!, $file: Upload) {
+    mutation Mut($title: String!, $file: Upload!) {
         createCsv(input: { params: { title: $title, file: $file } }) {
             item {
                 title
@@ -24,11 +24,29 @@ const ADD_CSV = gql`
 export class UploadFormComponent {
     constructor(private apollo: Apollo) {}
 
-    title_field = new FormControl('');
-    file_field = new FormControl('');
+    ngOnInit(): void {
+        this.csvForm = new FormGroup({
+            titleField: new FormControl(this.title, [
+                Validators.required,
+                Validators.minLength(2),
+            ]),
+            fileField: new FormControl(this.file, [Validators.required]),
+        });
+    }
+
+    get titleField() {
+        return this.csvForm.get('titleField');
+    }
+
+    get fileField() {
+        return this.csvForm.get('fileField');
+    }
 
     file: File | null = null;
     title: string = '';
+    csvForm!: FormGroup;
+    showTitleError: Boolean = false;
+    showFileError: Boolean = false;
 
     setFile(target: EventTarget | null) {
         if (!(target instanceof HTMLInputElement)) {
@@ -46,6 +64,15 @@ export class UploadFormComponent {
     }
 
     onUpload() {
+        if (this.csvForm.get('titleField')?.invalid) {
+            this.showTitleError = true;
+            return;
+        }
+        if (this.csvForm.get('fileField')?.invalid) {
+            this.showFileError = true;
+            return;
+        }
+
         this.apollo
             .mutate<Mut, MutVariables>({
                 mutation: ADD_CSV,
@@ -75,9 +102,7 @@ export class UploadFormComponent {
                 },
             })
             .subscribe((data) => {
-                console.log(data);
-                this.title_field.reset();
-                this.file_field.reset();
+                this.csvForm.reset({ title: '', file: null });
             });
     }
 }

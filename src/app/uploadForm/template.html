@@ -1,15 +1,40 @@
-<input
-    type="text"
-    class="csv-title"
-    (input)="setTitle($event)"
-    [formControl]="title_field"
-/>
+<form *ngIf="csvForm" [formGroup]="csvForm">
+    <input
+        type="text"
+        id="titleField"
+        class="csv-title form-control"
+        (input)="setTitle($event)"
+        formControlName="titleField"
+        required
+    />
+    <input
+        type="file"
+        id="fileField"
+        formControlName="fileField"
+        class="file-upload"
+        (change)="setFile($event.target)"
+    />
 
-<input
-    type="file"
-    [formControl]="file_field"
-    class="file-upload"
-    (change)="setFile($event.target)"
-/>
+    <button (click)="onUpload()">Upload</button>
+    <div>showFileError: {{showFileError}}</div>
+    <div>showTitleError: {{showTitleError}}</div>
 
-<button (click)="onUpload()">Upload</button>
+    <div
+        *ngIf="titleField?.invalid && (titleField?.dirty || titleField?.touched) && showTitleError"
+        class="alert alert-danger"
+    >
+        <div *ngIf="titleField?.errors?.required && showTitleError">
+            Title is required.
+        </div>
+        <div *ngIf="titleField?.errors?.minlength && showTitleError">
+            Title must be at least 2 characters long.
+        </div>
+    </div>
+    <div
+        *ngIf="fileField?.invalid && (fileField?.dirty || fileField?.touched) && showFileError"
+        class="alert alert-danger"
+    >
+        <div *ngIf="fileField?.errors?.required">File is required.</div>
+        <!-- <div *ngIf="fileField?.errors?.minlength">File must be a CSV</div> TODO: Add custom validator for CSV format-->
+    </div>
+</form>
