@@ -10,6 +10,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
     declarations: [
         RootComponent,
@@ -24,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
         HttpClientModule,
         ReactiveFormsModule,
         MatTableModule,
+        MatIconModule,
     ],
     providers: [],
     bootstrap: [RootComponent],

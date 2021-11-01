@@ -19,9 +19,17 @@ export const GET_ALL = gql`
 export class CsvListComponent implements OnInit {
     loading = true;
     csv_files: getAll[] = [];
-    displayedColumns: string[] = ['title', 'filename'];
+    displayedColumns: string[] = ['title', 'filename', 'actions'];
 
     constructor(private apollo: Apollo) {}
+
+    editRow(): void {
+        console.log(this);
+    }
+
+    deleteRow(): void {
+        console.log(this);
+    }
 
     ngOnInit() {
         this.apollo
