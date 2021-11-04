@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RootComponent } from './root/component';
@@ -11,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
     declarations: [
         RootComponent,
@@ -26,6 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
         ReactiveFormsModule,
         MatTableModule,
         MatIconModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [RootComponent],

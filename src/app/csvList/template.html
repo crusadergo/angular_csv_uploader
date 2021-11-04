@@ -13,7 +13,7 @@
     <<ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
-            <a (click)="editRow()"
+            <a (click)="editRow(element)"
                 ><mat-icon class="edit-row">edit</mat-icon></a
             >
             <a (click)="deleteRow()">
