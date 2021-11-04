@@ -31,17 +31,17 @@ export class CsvListComponent implements OnInit {
 
     constructor(private apollo: Apollo, public dialog: MatDialog) {}
 
-    editRow(element: csvItem): void {
+    openDialog(element: csvItem): void {
         this.dialogRef = this.dialog.open(editDialog, {
             data: { title: element.title, onClose: () => this.closeDialog() },
         });
     }
 
-    deleteRow(): void {}
-
     closeDialog(): void {
         this.dialogRef?.close();
     }
+
+    deleteRow(): void {}
 
     ngOnInit() {
         this.apollo
