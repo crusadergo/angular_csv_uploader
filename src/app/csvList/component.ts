@@ -11,6 +11,7 @@ import {
 export const GET_ALL = gql`
     query getAll {
         csvs {
+            id
             title
             filename
         }
@@ -32,12 +33,20 @@ export class CsvListComponent implements OnInit {
     constructor(private apollo: Apollo, public dialog: MatDialog) {}
 
     openDialog(element: csvItem): void {
+        if (this.is_edit_dialog_opened) {
+            return;
+        }
+
         this.dialogRef = this.dialog.open(editDialog, {
             data: { title: element.title, onClose: () => this.closeDialog() },
         });
+
+        this.is_edit_dialog_opened = true;
     }
 
     closeDialog(): void {
+        this.is_edit_dialog_opened = false;
+
         this.dialogRef?.close();
     }
 

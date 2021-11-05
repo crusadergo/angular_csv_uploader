@@ -9,6 +9,7 @@ const ADD_CSV = gql`
     mutation Mut($title: String!, $file: Upload!) {
         createCsv(input: { params: { title: $title, file: $file } }) {
             item {
+                id
                 title
                 filename
             }

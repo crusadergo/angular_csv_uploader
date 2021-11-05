@@ -9,6 +9,7 @@
 
 export interface Mut_createCsv_item {
   __typename: "CsvStorage";
+  id: string;
   title: string;
   filename: string;
 }

@@ -9,6 +9,7 @@
 
 export interface getAll_csvs {
   __typename: "CsvStorage";
+  id: string;
   title: string;
   filename: string;
 }
