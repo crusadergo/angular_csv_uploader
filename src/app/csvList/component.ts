@@ -112,7 +112,7 @@ export class CsvListComponent implements OnInit {
 
 @Component({
     selector: 'edit-dialog',
-    templateUrl: 'dialog.html',
+    templateUrl: 'update_dialog.html',
 })
 export class editDialog {
     constructor(
