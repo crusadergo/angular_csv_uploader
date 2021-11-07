@@ -1,7 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { getAll } from '../csvList/__generated__/getAll';
-import { Mut_createCsv_item as csvItem } from '../uploadForm/__generated__/mut';
+import {
+    updateMutVariables,
+    updateMut,
+    updateMut_updateCsv_item,
+} from '../csvList/__generated__/updateMut';
 import {
     MatDialog,
     MAT_DIALOG_DATA,
@@ -18,6 +22,18 @@ export const GET_ALL = gql`
     }
 `;
 
+const UPDATE_CSV = gql`
+    mutation updateMut($title: String!, $id: Int!) {
+        updateCsv(input: { params: { title: $title, id: $id } }) {
+            item {
+                id
+                title
+                filename
+            }
+        }
+    }
+`;
+
 @Component({
     selector: 'csv-list',
     templateUrl: 'template.html',
@@ -29,16 +45,30 @@ export class CsvListComponent implements OnInit {
     displayedColumns: string[] = ['title', 'filename', 'actions'];
     is_edit_dialog_opened = false;
     dialogRef: MatDialogRef<editDialog> | null = null;
+    title: string = '';
+    id: number | null = null;
 
     constructor(private apollo: Apollo, public dialog: MatDialog) {}
 
-    openDialog(element: csvItem): void {
+    setTitle(event: Event): void {
+        this.title = (event.target as HTMLInputElement).value;
+    }
+
+    openDialog(element: updateMut_updateCsv_item): void {
         if (this.is_edit_dialog_opened) {
             return;
         }
 
+        this.title = element.title;
+        this.id = Number(element.id);
+
         this.dialogRef = this.dialog.open(editDialog, {
-            data: { title: element.title, onClose: () => this.closeDialog() },
+            data: {
+                title: element.title,
+                onClose: () => this.closeDialog(),
+                onUpdate: () => this.updateTitle(),
+                setTitle: (event: Event) => this.setTitle(event),
+            },
         });
 
         this.is_edit_dialog_opened = true;
@@ -47,6 +77,22 @@ export class CsvListComponent implements OnInit {
     closeDialog(): void {
         this.is_edit_dialog_opened = false;
 
+        this.dialogRef?.close();
+    }
+
+    updateTitle(): void {
+        if (!this.id) {
+            return;
+        }
+
+        this.apollo
+            .mutate<updateMut, updateMutVariables>({
+                mutation: UPDATE_CSV,
+                variables: { title: this.title, id: this.id },
+            })
+            .subscribe();
+
+        this.is_edit_dialog_opened = false;
         this.dialogRef?.close();
     }
 
@@ -71,6 +117,11 @@ export class CsvListComponent implements OnInit {
 export class editDialog {
     constructor(
         @Inject(MAT_DIALOG_DATA)
-        public data: { title: string; onClose: () => void }
+        public data: {
+            title: string;
+            onClose: () => void;
+            onUpdate: () => void;
+            setTitle: (event: Event) => void;
+        }
     ) {}
 }

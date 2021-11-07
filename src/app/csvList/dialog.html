@@ -3,8 +3,10 @@
     id="titleField"
     class="csv-title form-control"
     value="{{data.title}}"
+    (input)="data.setTitle($event)"
     formControlName="titleField"
     required
 />
 
-<button (click)="data.onClose()">Close</button>
+<button (click)="data.onUpdate()">Update</button>
+<button (click)="data.onClose()">Cancel</button>
