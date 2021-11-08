@@ -1,6 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injector } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { getAll } from '../csvList/__generated__/getAll';
+import {
+    destroyMut,
+    destroyMutVariables,
+    destroyMut_destroyCsv_csvs,
+} from '../csvList/__generated__/destroyMut';
 import {
     updateMutVariables,
     updateMut,
@@ -34,6 +39,18 @@ const UPDATE_CSV = gql`
     }
 `;
 
+const DESTROY_CSV = gql`
+    mutation destroyMut($id: Int!) {
+        destroyCsv(input: { params: { id: $id } }) {
+            csvs {
+                id
+                title
+                filename
+            }
+        }
+    }
+`;
+
 @Component({
     selector: 'csv-list',
     templateUrl: 'template.html',
@@ -43,8 +60,9 @@ export class CsvListComponent implements OnInit {
     loading = true;
     csv_files: getAll[] = [];
     displayedColumns: string[] = ['title', 'filename', 'actions'];
-    is_edit_dialog_opened = false;
+    is_dialog_opened = false;
     dialogRef: MatDialogRef<editDialog> | null = null;
+    destroyDialogRef: MatDialogRef<destroyDialog> | null = null;
     title: string = '';
     id: number | null = null;
 
@@ -55,7 +73,7 @@ export class CsvListComponent implements OnInit {
     }
 
     openDialog(element: updateMut_updateCsv_item): void {
-        if (this.is_edit_dialog_opened) {
+        if (this.is_dialog_opened) {
             return;
         }
 
@@ -71,13 +89,51 @@ export class CsvListComponent implements OnInit {
             },
         });
 
-        this.is_edit_dialog_opened = true;
+        this.is_dialog_opened = true;
     }
 
     closeDialog(): void {
-        this.is_edit_dialog_opened = false;
+        this.is_dialog_opened = false;
 
         this.dialogRef?.close();
+        this.destroyDialogRef?.close();
+    }
+
+    destroyItem(): void {
+        if (!this.id) {
+            return;
+        }
+
+        this.apollo
+            .mutate<destroyMut, destroyMutVariables>({
+                mutation: DESTROY_CSV,
+                variables: { id: this.id },
+                update: (store, { data }) => {
+                    const cached = store.readQuery<getAll>({
+                        query: GET_ALL,
+                    });
+
+                    if (!cached) {
+                        return;
+                    }
+
+                    if (!data?.destroyCsv) {
+                        return;
+                    }
+
+                    const normalizedId = store.identify({
+                        id: this.id,
+                        __typename: 'CsvStorage',
+                    });
+
+                    store.evict({ id: normalizedId });
+                    store.gc();
+
+                    this.destroyDialogRef?.close();
+                    this.is_dialog_opened = false;
+                },
+            })
+            .subscribe();
     }
 
     updateTitle(): void {
@@ -92,11 +148,31 @@ export class CsvListComponent implements OnInit {
             })
             .subscribe();
 
-        this.is_edit_dialog_opened = false;
         this.dialogRef?.close();
+        this.is_dialog_opened = false;
     }
 
-    deleteRow(): void {}
+    deleteRow(element: updateMut_updateCsv_item): void {
+        if (!element.id) {
+            return;
+        }
+
+        if (this.is_dialog_opened) {
+            return;
+        }
+
+        this.id = Number(element.id);
+
+        this.destroyDialogRef = this.dialog.open(destroyDialog, {
+            data: {
+                title: element.title,
+                onClose: () => this.closeDialog(),
+                onDestroy: () => this.destroyItem(),
+            },
+        });
+
+        this.is_dialog_opened = true;
+    }
 
     ngOnInit() {
         this.apollo
@@ -121,7 +197,22 @@ export class editDialog {
             title: string;
             onClose: () => void;
             onUpdate: () => void;
+            onDestroy: () => void;
             setTitle: (event: Event) => void;
+        }
+    ) {}
+}
+
+@Component({
+    selector: 'delete-dialog',
+    templateUrl: 'delete_dialog.html',
+})
+export class destroyDialog {
+    constructor(
+        @Inject(MAT_DIALOG_DATA)
+        public data: {
+            onDestroy: () => void;
+            onClose: () => void;
         }
     ) {}
 }
