@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
     declarations: [
         RootComponent,
@@ -30,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatIconModule,
         MatDialogModule,
         BrowserAnimationsModule,
+        MatInputModule,
     ],
     providers: [],
     bootstrap: [RootComponent],
