@@ -59,6 +59,7 @@ export class UploadFormComponent {
             return;
         }
 
+        this.title = files[0].name;
         this.file = files[0];
     }
 
@@ -67,7 +68,6 @@ export class UploadFormComponent {
     }
 
     onUpload() {
-        console.log(this.file);
         if (this.csvForm.get('titleField')?.invalid) {
             this.showTitleError = true;
             return;
