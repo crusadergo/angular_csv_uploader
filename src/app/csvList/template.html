@@ -1,5 +1,11 @@
-<p>CSV List</p>
-<table mat-table #table [dataSource]="csv_files" matSort class="main-table">
+<table
+    mat-table
+    #table
+    [dataSource]="csv_files"
+    matSort
+    class="main-table"
+    id="csv-table"
+>
     <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef>Title</th>
         <td mat-cell *matCellDef="let element">{{element.title}}</td>

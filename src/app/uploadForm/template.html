@@ -1,7 +1,15 @@
 <div class="upload-form">
     <form *ngIf="csvForm" [formGroup]="csvForm" class="form-class">
+        <ngx-file-drag-drop
+            formControlName="fileField"
+            activeBorderColor="#3F51B5"
+            (valueChanged)="setFile($event)"
+            class="file-upload"
+            id="fileField"
+        >
+        </ngx-file-drag-drop>
+
         <mat-form-field appearance="fill" class="title-input">
-            <mat-label>Title</mat-label>
             <input
                 matInput
                 placeholder="Enter"
@@ -13,16 +21,13 @@
                 required
             />
         </mat-form-field>
-        <ngx-file-drag-drop
-            formControlName="fileField"
-            activeBorderColor="#3F51B5"
-            (valueChanged)="setFile($event)"
-            class="file-upload"
-            id="fileField"
-        >
-        </ngx-file-drag-drop>
 
-        <button mat-raised-button color="primary" (click)="onUpload()">
+        <button
+            mat-raised-button
+            color="accent"
+            class="upload-form-button"
+            (click)="onUpload()"
+        >
             Upload
         </button>
 

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./style.sass'],
 })
 export class RootComponent {
-    title = 'Load CSV';
+    title = '';
 }
