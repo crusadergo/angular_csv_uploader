@@ -14,6 +14,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { NgxFileDragDropModule } from 'ngx-file-drag-drop';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
     declarations: [
         RootComponent,
@@ -32,6 +34,8 @@ import { MatInputModule } from '@angular/material/input';
         MatDialogModule,
         BrowserAnimationsModule,
         MatInputModule,
+        NgxFileDragDropModule,
+        MatButtonModule,
     ],
     providers: [],
     bootstrap: [RootComponent],

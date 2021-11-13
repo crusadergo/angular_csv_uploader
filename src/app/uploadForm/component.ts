@@ -4,6 +4,7 @@ import { GET_ALL } from '../csvList/component';
 import { MutVariables, Mut } from '../uploadForm/__generated__/mut';
 import { getAll } from '../csvList/__generated__/getAll';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FileValidators } from 'ngx-file-drag-drop';
 
 const ADD_CSV = gql`
     mutation Mut($title: String!, $file: Upload!) {
@@ -49,15 +50,16 @@ export class UploadFormComponent {
     showTitleError: Boolean = false;
     showFileError: Boolean = false;
 
-    setFile(target: EventTarget | null) {
-        if (!(target instanceof HTMLInputElement)) {
-            return;
-        }
-        if (!target.files) {
+    setFile(files: File[] | null) {
+        if (!files) {
             return;
         }
 
-        this.file = target.files.item(0);
+        if (!(files[0] instanceof File)) {
+            return;
+        }
+
+        this.file = files[0];
     }
 
     setTitle(event: Event): void {
@@ -65,6 +67,7 @@ export class UploadFormComponent {
     }
 
     onUpload() {
+        console.log(this.file);
         if (this.csvForm.get('titleField')?.invalid) {
             this.showTitleError = true;
             return;

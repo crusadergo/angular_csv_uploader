@@ -1,10 +1,10 @@
 <div class="upload-form">
-    <form *ngIf="csvForm" [formGroup]="csvForm">
-        <mat-form-field appearance="fill">
+    <form *ngIf="csvForm" [formGroup]="csvForm" class="form-class">
+        <mat-form-field appearance="fill" class="title-input">
             <mat-label>Title</mat-label>
             <input
                 matInput
-                placeholder="Some title"
+                placeholder="Enter"
                 type="text"
                 id="titleField"
                 class="csv-title form-control"
@@ -13,23 +13,18 @@
                 required
             />
         </mat-form-field>
-        <!-- <input
-            type="text"
-            id="titleField"
-            class="csv-title form-control"
-            (input)="setTitle($event)"
-            formControlName="titleField"
-            required
-        /> -->
-        <input
-            type="file"
-            id="fileField"
+        <ngx-file-drag-drop
             formControlName="fileField"
+            activeBorderColor="#3F51B5"
+            (valueChanged)="setFile($event)"
             class="file-upload"
-            (change)="setFile($event.target)"
-        />
+            id="fileField"
+        >
+        </ngx-file-drag-drop>
 
-        <button (click)="onUpload()">Upload</button>
+        <button mat-raised-button color="primary" (click)="onUpload()">
+            Upload
+        </button>
 
         <div
             *ngIf="titleField?.invalid && (titleField?.dirty || titleField?.touched) && showTitleError"

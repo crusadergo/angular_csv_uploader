@@ -7108,6 +7108,13 @@ neo-async@^2.5.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-file-drag-drop@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/ngx-file-drag-drop/-/ngx-file-drag-drop-5.1.2.tgz#52c1ab159fb9bbe6ec5371c38f10e4d9aa2846af"
+  integrity sha512-dPd1Rhg2q8JgYvEgd6c5aHzlij2qd++cleEp1+oAR6d6mYxYFDpaPF8+hsJ6K7F/74mGC89Q+QDKgvZk6TAeWQ==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
