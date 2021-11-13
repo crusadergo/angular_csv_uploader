@@ -68,15 +68,6 @@ export class UploadFormComponent {
     }
 
     onUpload() {
-        if (this.csvForm.get('titleField')?.invalid) {
-            this.showTitleError = true;
-            return;
-        }
-        if (this.csvForm.get('fileField')?.invalid) {
-            this.showFileError = true;
-            return;
-        }
-
         this.apollo
             .mutate<Mut, MutVariables>({
                 mutation: ADD_CSV,

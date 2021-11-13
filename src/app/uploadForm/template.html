@@ -16,6 +16,7 @@
                 type="text"
                 id="titleField"
                 class="csv-title form-control"
+                [value]="this.title"
                 (input)="setTitle($event)"
                 formControlName="titleField"
                 required
