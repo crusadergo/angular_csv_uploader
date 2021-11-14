@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
     selector: 'edit-dialog',
     templateUrl: 'template.html',
+    styleUrls: ['styles.sass'],
 })
 export class EditDialogComponent {
     constructor(

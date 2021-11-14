@@ -1,12 +1,20 @@
-<input
-    type="text"
-    id="titleField"
-    class="csv-title form-control"
-    value="{{data.title}}"
-    (input)="data.setTitle($event)"
-    formControlName="titleField"
-    required
-/>
+<mat-form-field appearance="fill" class="title-input-dialog">
+    <input
+        matInput
+        placeholder="Enter"
+        type="text"
+        id="titleField"
+        class="csv-title form-control"
+        value="{{data.title}}"
+        (input)="data.setTitle($event)"
+        formControlName="titleField"
+        required
+    />
+</mat-form-field>
 
-<button (click)="data.onUpdate()">Update</button>
-<button (click)="data.onClose()">Cancel</button>
+<div class="edit-dialog-actions">
+    <button mat-raised-button color="primary" (click)="data.onUpdate()">
+        Update
+    </button>
+    <button mat-raised-button (click)="data.onClose()">Cancel</button>
+</div>
