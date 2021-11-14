@@ -62,7 +62,6 @@ export class CsvListComponent implements OnInit {
     loading = true;
     csv_files: getAll[] = [];
     displayedColumns: string[] = ['title', 'filename', 'actions'];
-    is_dialog_opened = false;
     dialogRef: MatDialogRef<EditDialogComponent> | null = null;
     destroyDialogRef: MatDialogRef<DeleteDialogComponent> | null = null;
     title: string = '';
@@ -75,10 +74,6 @@ export class CsvListComponent implements OnInit {
     }
 
     openDialog(element: updateMut_updateCsv_item): void {
-        if (this.is_dialog_opened) {
-            return;
-        }
-
         this.title = element.title;
         this.id = Number(element.id);
 
@@ -90,13 +85,9 @@ export class CsvListComponent implements OnInit {
                 setTitle: (event: Event) => this.setTitle(event),
             },
         });
-
-        this.is_dialog_opened = true;
     }
 
     closeDialog(): void {
-        this.is_dialog_opened = false;
-
         this.dialogRef?.close();
         this.destroyDialogRef?.close();
     }
@@ -132,7 +123,6 @@ export class CsvListComponent implements OnInit {
                     store.gc();
 
                     this.destroyDialogRef?.close();
-                    this.is_dialog_opened = false;
                 },
             })
             .subscribe();
@@ -151,15 +141,10 @@ export class CsvListComponent implements OnInit {
             .subscribe();
 
         this.dialogRef?.close();
-        this.is_dialog_opened = false;
     }
 
     deleteRow(element: updateMut_updateCsv_item): void {
         if (!element.id) {
-            return;
-        }
-
-        if (this.is_dialog_opened) {
             return;
         }
 
@@ -172,8 +157,6 @@ export class CsvListComponent implements OnInit {
                 onDestroy: () => this.destroyItem(),
             },
         });
-
-        this.is_dialog_opened = true;
     }
 
     ngOnInit() {
