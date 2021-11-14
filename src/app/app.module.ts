@@ -7,6 +7,8 @@ import { RootComponent } from './root/component';
 import { UploadFormComponent } from './uploadForm/component';
 import { CsvListComponent } from './csvList/component';
 import { CsvItemComponent } from './csvItem/component';
+import { DeleteDialogComponent } from './deleteDialog/component';
+import { EditDialogComponent } from './editDialog/component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
         UploadFormComponent,
         CsvListComponent,
         CsvItemComponent,
+        DeleteDialogComponent,
+        EditDialogComponent,
     ],
     imports: [
         BrowserModule,

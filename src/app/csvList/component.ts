@@ -16,6 +16,8 @@ import {
     MAT_DIALOG_DATA,
     MatDialogRef,
 } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../deleteDialog/component';
+import { EditDialogComponent } from '../editDialog/component';
 
 export const GET_ALL = gql`
     query getAll {
@@ -61,8 +63,8 @@ export class CsvListComponent implements OnInit {
     csv_files: getAll[] = [];
     displayedColumns: string[] = ['title', 'filename', 'actions'];
     is_dialog_opened = false;
-    dialogRef: MatDialogRef<editDialog> | null = null;
-    destroyDialogRef: MatDialogRef<destroyDialog> | null = null;
+    dialogRef: MatDialogRef<EditDialogComponent> | null = null;
+    destroyDialogRef: MatDialogRef<DeleteDialogComponent> | null = null;
     title: string = '';
     id: number | null = null;
 
@@ -80,7 +82,7 @@ export class CsvListComponent implements OnInit {
         this.title = element.title;
         this.id = Number(element.id);
 
-        this.dialogRef = this.dialog.open(editDialog, {
+        this.dialogRef = this.dialog.open(EditDialogComponent, {
             data: {
                 title: element.title,
                 onClose: () => this.closeDialog(),
@@ -163,7 +165,7 @@ export class CsvListComponent implements OnInit {
 
         this.id = Number(element.id);
 
-        this.destroyDialogRef = this.dialog.open(destroyDialog, {
+        this.destroyDialogRef = this.dialog.open(DeleteDialogComponent, {
             data: {
                 title: element.title,
                 onClose: () => this.closeDialog(),
@@ -184,35 +186,4 @@ export class CsvListComponent implements OnInit {
                 this.csv_files = result?.data?.csvs;
             });
     }
-}
-
-@Component({
-    selector: 'edit-dialog',
-    templateUrl: 'update_dialog.html',
-})
-export class editDialog {
-    constructor(
-        @Inject(MAT_DIALOG_DATA)
-        public data: {
-            title: string;
-            onClose: () => void;
-            onUpdate: () => void;
-            onDestroy: () => void;
-            setTitle: (event: Event) => void;
-        }
-    ) {}
-}
-
-@Component({
-    selector: 'delete-dialog',
-    templateUrl: 'delete_dialog.html',
-})
-export class destroyDialog {
-    constructor(
-        @Inject(MAT_DIALOG_DATA)
-        public data: {
-            onDestroy: () => void;
-            onClose: () => void;
-        }
-    ) {}
 }
