@@ -10,6 +10,7 @@ export class DeleteDialogComponent {
     constructor(
         @Inject(MAT_DIALOG_DATA)
         public data: {
+            title: string;
             onDestroy: () => void;
             onClose: () => void;
         }

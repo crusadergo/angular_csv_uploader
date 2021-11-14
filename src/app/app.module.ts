@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { NgxFileDragDropModule } from 'ngx-file-drag-drop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
     declarations: [
         RootComponent,
@@ -40,6 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
         MatInputModule,
         NgxFileDragDropModule,
         MatButtonModule,
+        MatCardModule,
     ],
     providers: [],
     bootstrap: [RootComponent],
