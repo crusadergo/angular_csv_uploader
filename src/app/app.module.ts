@@ -9,6 +9,8 @@ import { CsvListComponent } from './csvList/component';
 import { CsvItemComponent } from './csvItem/component';
 import { DeleteDialogComponent } from './deleteDialog/component';
 import { EditDialogComponent } from './editDialog/component';
+import { SignupComponent } from './signup/component';
+
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +29,7 @@ import { MatCardModule } from '@angular/material/card';
         CsvItemComponent,
         DeleteDialogComponent,
         EditDialogComponent,
+        SignupComponent,
     ],
     imports: [
         BrowserModule,
