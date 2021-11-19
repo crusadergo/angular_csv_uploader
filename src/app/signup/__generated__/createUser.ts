@@ -16,6 +16,7 @@ export interface createUser_createUser_user {
 export interface createUser_createUser {
   __typename: "CreateUserPayload";
   user: createUser_createUser_user;
+  token: string | null;
 }
 
 export interface createUser {

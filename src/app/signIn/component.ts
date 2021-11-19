@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
-import { createUser, createUserVariables } from './__generated__/createUser';
+import {SignInUser_signinUser_user ,SignInUserVariables} from './__generated__/SignInUser'
 
-const CREATE_USER = gql`
-    mutation createUser($login: String!, $password: String!) {
-        createUser(input: { params: { login: $login, password: $password } }) {
-            user {
-                id
-                login
-            }
+const SIGN_IN = gql`
+    mutation SignInUser($login: String!, $password: String!) {
+        signinUser(input: { params: { login: $login, password: $password } }) {
             token
+            user {
+                login
+                id
+            }
         }
     }
 `;
+
 @Component({
-    selector: 'signup-form',
+    selector: 'signin-form',
     templateUrl: 'template.html',
     styleUrls: ['styles.sass'],
 })
-export class SignupComponent {
+export class SignInComponent {
     constructor(private apollo: Apollo) {}
 
     login: string = '';
@@ -57,8 +58,8 @@ export class SignupComponent {
 
     onClick(): void {
         this.apollo
-            .mutate<createUser, createUserVariables>({
-                mutation: CREATE_USER,
+            .mutate<SignInUser_signinUser_user, SignInUserVariables>({
+                mutation: SIGN_IN,
                 variables: {
                     login: this.login,
                     password: this.password,

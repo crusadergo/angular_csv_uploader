@@ -1,0 +1,32 @@
+<div class="signin-form">
+    <form *ngIf="userForm" [formGroup]="userForm" class="form-class">
+        <mat-form-field appearance="fill" class="login-input">
+            <input
+                matInput
+                placeholder="login"
+                type="text"
+                id="loginField"
+                class="form-control"
+                formControlName="loginField"
+                (input)="setLogin($event)"
+                required
+            />
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="password-input">
+            <input
+                matInput
+                placeholder="password"
+                type="password"
+                id="passwordField"
+                class="form-control"
+                formControlName="passwordField"
+                (input)="setPassword($event)"
+                required
+            />
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" (click)="onClick()">
+            SignIn
+        </button>
+    </form>
+</div>
