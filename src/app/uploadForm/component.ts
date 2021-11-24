@@ -52,10 +52,22 @@ export class UploadFormComponent {
 
     setFile(files: File[] | null) {
         if (!files) {
+            this.csvForm.patchValue({ file: null });
+
             return;
         }
 
         if (!(files[0] instanceof File)) {
+            this.csvForm.patchValue({ file: null });
+
+            return;
+        }
+
+        let file_type: string = files[0].type;
+
+        if (!(file_type == 'csv' || file_type == 'text/csv')) {
+            this.csvForm.patchValue({ file: null });
+
             return;
         }
 
