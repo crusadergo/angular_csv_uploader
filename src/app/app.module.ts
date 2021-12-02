@@ -50,5 +50,6 @@ import { MatCardModule } from '@angular/material/card';
     ],
     providers: [],
     bootstrap: [RootComponent],
+    entryComponents: [DeleteDialogComponent, EditDialogComponent],
 })
 export class AppModule {}
